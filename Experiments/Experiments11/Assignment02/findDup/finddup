@@ -1,0 +1,8 @@
+#!/bin/bash
+
+DIRECTORY=${1}
+
+if [ ${#} -ne 1 ]
+then
+	echo "Usage : $0 directory"
+fi
