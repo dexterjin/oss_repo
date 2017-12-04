@@ -1,0 +1,19 @@
+{
+  "name": "experiments11",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@khuhub.khu.ac.kr:Prof.JinSeongwook/OSS-2017-02.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.62.0",
+    "express-fileupload": "^0.1.3"
+  }
+}
