@@ -1,8 +1,0 @@
-#!/bin/bash
-
-FILES=${1}
-
-if [ ${#} -ne 1 ]
-then
-	echo "Usage : psget process_name"
-fi
