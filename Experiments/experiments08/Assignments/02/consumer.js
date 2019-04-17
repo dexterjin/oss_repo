@@ -6,8 +6,3 @@ producer.on('add', function(t) {
 });
 
 producer.start();
-
-// stop the clock 10 seconds after
-// setTimeout(function() {  
-//   clock.stop();
-//   }, 10e3)
