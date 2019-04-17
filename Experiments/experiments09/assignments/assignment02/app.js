@@ -38,4 +38,4 @@ app.get('/user/:userId', auth,function (req, res) {
 	// get User Information
 	res.send("OK");
 });	
-var server = app.listen(23023);
+var server = app.listen(80);
