@@ -17,7 +17,7 @@ app.get('/book/:bookId', function (req, res) {
 app.post('/book', function (req, res) {
 	// Create book information
 	books[req.body.id] = [req.body.id, req.body.name, req.body.price, req.body.author];
-	
+	res.send(books[req.body.id]);
 })
 
 app.put('/book/:bookId', function (req, res) {
