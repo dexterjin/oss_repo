@@ -1,4 +1,4 @@
-function reverse (input) {
+﻿function reverse (input) {
 
 }
 var arr = [0, 1, 2, 3];
@@ -7,4 +7,5 @@ var arr = [0, 1, 2, 3];
 // 아래의 console.log 2개의 출력이 동일해야 함
 
 console.log ("Reversed array is : " + arr.reverse() );
+arr.reverse();
 console.log ("Reversed array is : " + reverse(arr));
