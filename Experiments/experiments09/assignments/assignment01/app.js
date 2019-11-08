@@ -14,6 +14,14 @@ app.get('/book/:bookId', function (req, res) {
     res.send(books[bookId]);
 });
 
+/*
+{
+	"id" : 2,
+	"name" : "book2",
+	"price" : 2000,
+	"author" : "jin"
+}
+*/
 app.post('/book', function (req, res) {
 	// Create book information
 	books[req.body.id] = [req.body.id, req.body.name, req.body.price, req.body.author];
@@ -28,7 +36,7 @@ app.put('/book/:bookId', function (req, res) {
 
 app.delete('/book/:bookId', function (req, res) {
 	// Delete book information
-	
+
 })
 var server = app.listen(80);
 	console.log(books);
