@@ -13,6 +13,8 @@ var userId = 'test';
 var userPass = '1234';
 
 app.get('/login/:userId/password/:password', function (req, res) {
+	// users 배열에서 찾도록 수정해야 함
+	// admin 여부를 지원할 수 있도록 수정해야 함
 	if (req.params.userId == userId && req.params.password == userPass) {
 		req.session.userId =  userId;
 	}
@@ -23,19 +25,22 @@ app.get('/logout/:userId', function (req, res) {
 	// Logout
 	req.session.userId = null;
 	res.send("LogOut");
-	
+
 });
 
 var auth = function (req, res, next) {
 	// Session Check
-	if (req.session.userId != null) 
+	if (req.session.userId != null)
 		next();
 	else
 		res.send("Error");
-		
+
 };
 app.get('/user/:userId', auth,function (req, res) {
 	// get User Information
 	res.send("OK");
-});	
+});
+
+// 사용자 추가 시에 admin 여부도 추가해야 함
+
 var server = app.listen(80);
