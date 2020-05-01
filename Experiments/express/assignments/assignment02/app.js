@@ -9,8 +9,14 @@ app.use(bodyParser.json());
 
 
 var users = new Array();
+users[0] = {
+	"userId" : 0,
+	"name" : "jin",
+	"password" : "abc",
+	"isAdmin" : true
+}
 
-app.get('/login', function (req, res) {
+app.put('/login', function (req, res) {
 	// users 배열에서 찾도록 처리 해야 함
 	// admin 여부를 확인하여 체크
 	// req.body.id : ID
@@ -19,7 +25,7 @@ app.get('/login', function (req, res) {
 	res.send("Login");
 });
 
-app.get('/logout', function (req, res) {
+app.put('/logout', function (req, res) {
 	// Logout
 	// 세션 유효 여부를 체크하고 세션 Delete
 	req.session.userId = null;
