@@ -1,11 +1,15 @@
 var express = require('express');
 const request = require('request');
 const TARGET_URL = 'https://api.line.me/v2/bot/message/reply'
-const TOKEN = '채널 토큰으로 교체'
+const TOKEN = '채널 토큰'
 const PAPAGO_URL = 'https://openapi.naver.com/v1/papago/n2mt'
-const PAPAGO_ID = '네이버 클라이언트 ID'
-const PAPAGO_SECRET = '네이버 클라이언트 Secret'
-
+const PAPAGO_ID = '파파고 ID'
+const PAPAGO_SECRET = '파파고 Client Secret'
+const fs = require('fs');
+const path = require('path');
+const HTTPS = require('https');
+const domain = "도메인 명"
+const sslport = 23023;
 const bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser.json());
@@ -66,8 +70,18 @@ function trans(replyToken, message) {
 
 }
 
-var server = app.listen(23023, function () {
-        var host = server.address().address
-        var port = server.address().port
-        console.log("Example app listening at http://%s:%s", host, port)
-})
+try {
+    const option = {
+      ca: fs.readFileSync('/etc/letsencrypt/live/' + domain +'/fullchain.pem'),
+      key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/' + domain +'/privkey.pem'), 'utf8').toString(),
+      cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/' + domain +'/cert.pem'), 'utf8').toString(),
+    };
+  
+    HTTPS.createServer(option, app).listen(sslport, () => {
+      console.log(`[HTTPS] Server is started on port ${sslport}`);
+    });
+  } catch (error) {
+    console.log('[HTTPS] HTTPS 오류가 발생하였습니다. HTTPS 서버는 실행되지 않습니다.');
+    console.log(error);
+  }
+  

@@ -1,7 +1,12 @@
 var express = require('express');
 const request = require('request');
 const TARGET_URL = 'https://api.line.me/v2/bot/message/reply'
-const TOKEN = '채널 토큰으로 교체 해야 함'
+const TOKEN = '채널 토큰으로 변경'
+const fs = require('fs');
+const path = require('path');
+const HTTPS = require('https');
+const domain = "도메인 변경"
+const sslport = 23023;
 
 const bodyParser = require('body-parser');
 var app = express();
@@ -45,8 +50,18 @@ app.post('/hook', function (req, res) {
     res.sendStatus(200);
 });
 
-var server = app.listen(23023, function () {
-        var host = server.address().address
-        var port = server.address().port
-        console.log("Example app listening at http://%s:%s", host, port)
-})
+try {
+    const option = {
+      ca: fs.readFileSync('/etc/letsencrypt/live/' + domain +'/fullchain.pem'),
+      key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/' + domain +'/privkey.pem'), 'utf8').toString(),
+      cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/' + domain +'/cert.pem'), 'utf8').toString(),
+    };
+  
+    HTTPS.createServer(option, app).listen(sslport, () => {
+      console.log(`[HTTPS] Server is started on port ${sslport}`);
+    });
+  } catch (error) {
+    console.log('[HTTPS] HTTPS 오류가 발생하였습니다. HTTPS 서버는 실행되지 않습니다.');
+    console.log(error);
+  }
+  
