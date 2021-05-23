@@ -4,9 +4,14 @@ const path = require('path');
 const HTTPS = require('https');
 
 const app = express();
+// 본인이 소유한 도메인으로 변경해야 함
+// www 붙여야 함
 const domain = "www.stagefive.tk"
 const sslport = 23023;
 
+app.get('/', function (req, res) {
+	  res.send('Hello World');
+})
 
 try {
   const option = {
